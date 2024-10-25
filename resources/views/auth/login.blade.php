@@ -32,7 +32,8 @@
     <div class="container d-flex justify-content-center align-items-center" style="margin-top: 60px"> 
         <div class="card" style="width: 35%"> 
             <div class="card-body p-4"> 
-                <h3 class="card-title text-center">Login</h3> 
+                <h3 class="card-title text-center">Login</h3>
+                
                 <form action="{{ route('postLogin') }}" method="POST"> 
                     @csrf 
                     <div class="form-group mt-4"> 
