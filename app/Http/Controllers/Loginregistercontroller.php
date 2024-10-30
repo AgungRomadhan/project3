@@ -24,11 +24,9 @@ class LoginRegisterController extends Controller
     public function adminHome(Request $request) {
         $search = $request->input('search');
 
-        $data = User::where('level', 'admin')
-            ->where(function ($query) use ($search) {
+        $data = User::where('level', 'admin')->where(function ($query) use ($search) {
                 $query->where('name', 'LIKE', '%' . $search . '%');
-            })
-            ->paginate(5);
+            })->paginate(5);
         return view('admin.home', compact('data'));
         }
 
@@ -39,7 +37,7 @@ class LoginRegisterController extends Controller
     public function postRegister(Request $request) {
         $request->validate([
             'name' => 'required',
-            'email' => 'required|email:dns',
+            'email' => 'required|email',
             'jenisKelamin' => 'required',
             'password' => 'required|min:8|max:20|confirmed'
             ]);
@@ -61,7 +59,7 @@ class LoginRegisterController extends Controller
 
     public function postLogin(Request $request) {
         $request->validate([
-            'email' => 'required|email:dns',
+            'email' => 'required|email',
             'password' => 'required|min:8|max:20'
             ]);
 
@@ -75,7 +73,7 @@ class LoginRegisterController extends Controller
         }
                 return back()->with('failed', 'Maaf, terjadi kesalahan, coba kembali beberapa saat!');
 }
-public function logout() {
+    public function logout() {
     Auth::logout();
         return redirect('/');
 }
